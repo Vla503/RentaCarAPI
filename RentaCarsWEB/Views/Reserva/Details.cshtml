@@ -1,0 +1,67 @@
+﻿@model RentaCars.EN.Reserva
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reserva</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VehiculoID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehiculoID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LugarDevolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LugarDevolucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraDev)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraDev)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReservaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
