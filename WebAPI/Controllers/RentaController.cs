@@ -22,26 +22,63 @@ namespace WebAPI.Controllers
 
         public Renta Get(int id)
         {
+            Renta rent = renta.findRenta(id);
+            if (renta == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NoContent));
+            }
             return renta.findRenta(id);
         }
 
         // POST: api/Renta
-        public void Post([FromBody] Renta rent)
+        public HttpResponseMessage Post([FromBody] Renta rent)
         {
-            renta.agregarrenta(rent);
+            if (ModelState.IsValid)
+            {
+                renta.agregarrenta(rent);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, renta);
+                response.Headers.Location = new Uri(Url.Link("DefauldtApi", new { id = rent.RentaID }));
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
         }
-
         // PUT: api/Renta/5
-        public void Put(int id, [FromBody]Renta rent)
+        public HttpResponseMessage Put(int id, [FromBody] Renta rent)
         {
-            rent.RentaID = id;
-            renta.ModificarRenta(rent);
+            if (ModelState.IsValid)
+            {
+                if (id > 0)
+                {
+                    rent.RentaID = id;
+                    renta.ModificarRenta(rent);
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotModified));
+                }
+            }
+            else
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
+            }
         }
 
         // DELETE: api/Renta/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            renta.DeleteRenta(id);
+            if (ModelState.IsValid)
+            {
+                renta.DeleteRenta(id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            else
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
+            }
         }
     }
 }
