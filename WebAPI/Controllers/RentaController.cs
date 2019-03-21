@@ -7,11 +7,13 @@ using System.Web.Http;
 //agregar
 using RentaCars.EN;
 using RentaCars.BL;
+using System.Web.Http.Cors;
 
 namespace WebAPI.Controllers
 {
     public class RentaController : ApiController
     {
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         private RentaBL renta = new RentaBL();
         // GET: api/Renta
         public IEnumerable<Renta> Get()
