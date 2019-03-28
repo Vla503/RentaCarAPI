@@ -6,12 +6,15 @@ using System.Net.Http;
 using System.Web.Http;
 using RentaCars.EN;
 using RentaCars.BL;
+using System.Web.Http.Cors;
 
 namespace WebAPI.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+
     public class EstadoController : ApiController
     {
-        private EstadoBL EBL = new EstadoBL();
+                private EstadoBL EBL = new EstadoBL();
         // GET: api/Estado
         public IEnumerable<Estado> Get()
         {
